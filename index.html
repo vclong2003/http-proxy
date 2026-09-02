@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VCLab Proxy</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='2' y1='12' x2='22' y2='12'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/></svg>"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f8fafc;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .container {
+        background: #ffffff;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow:
+          0 10px 25px rgba(0, 0, 0, 0.05),
+          0 4px 6px rgba(0, 0, 0, 0.02);
+        border: 1px solid #e2e8f0;
+        width: 90%;
+        max-width: 600px;
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 0.5rem;
+        font-size: 1.6rem;
+        color: #0f172a;
+      }
+      p {
+        color: #64748b;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .form-group {
+        display: flex;
+        gap: 0.5rem;
+      }
+      input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        background-color: #f8fafc;
+        color: #0f172a;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      input:focus {
+        border-color: #0284c7;
+        background-color: #ffffff;
+      }
+      button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        background-color: #0284c7;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      button:hover {
+        background-color: #0369a1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>HTTP & CORS Proxy</h1>
+      <p>
+        Bypass CORS restrictions for API endpoints and access web content
+        directly.
+      </p>
+      <form id="proxy-form">
+        <div class="form-group">
+          <input
+            type="text"
+            id="target-url"
+            placeholder="example.com, api.example.com"
+            required
+          />
+          <button type="submit">Browse</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("proxy-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          let url = document.getElementById("target-url").value.trim();
+          if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
+          }
+          window.location.href = "/proxy/" + url;
+        });
+    </script>
+  </body>
+</html>

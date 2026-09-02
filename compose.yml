@@ -1,0 +1,9 @@
+services:
+  http-proxy:
+    build: .
+    container_name: http-proxy
+    restart: unless-stopped
+    ports:
+      - "8089:4000"
+    environment:
+      - NODE_ENV=production
